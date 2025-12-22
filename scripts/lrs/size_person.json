@@ -5,10 +5,10 @@
             "min": 1,
             "max": 15,
             "config": {
-                "prior_loss_weight": 0.8,
-                "max_train_epochs": 21,
+                "prior_loss_weight": 0.7,
+                "max_train_epochs": 30,
                 "optimizer_args": ["decouple=True", "d_coef=1", "weight_decay=0.001", "use_bias_correction=True", "safeguard_warmup=True"],
-                "min_snr_gamma": 7
+                "min_snr_gamma": 6
             }
         },
         {
@@ -26,11 +26,10 @@
             "min": 31,
             "max": 50,
             "config": {
-                "prior_loss_weight": 0.7,
-                "max_train_epochs": 30,
+                "prior_loss_weight": 0.8,
+                "max_train_epochs": 21,
                 "optimizer_args": ["decouple=True", "d_coef=1", "weight_decay=0.001", "use_bias_correction=True", "safeguard_warmup=True"],
-                "min_snr_gamma": 6,
-                "train_batch_size": 8
+                "min_snr_gamma": 7
             }
         },
         {
