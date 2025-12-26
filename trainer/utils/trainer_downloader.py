@@ -97,13 +97,18 @@ def download_flux_unet(repo_id: str, output_dir: str) -> str:
     return local_path
 
 
-async def download_base_model(repo_id: str, save_root: str) -> str:
+async def download_base_model(repo_id: str, save_root: str, model_type: str = None) -> str:
     model_name = repo_id.replace("/", "--")
     save_path = os.path.join(save_root, model_name)
     if os.path.exists(save_path):
         print(f"Model {repo_id} already exists at {save_path}. Skipping download.")
         return save_path
     else:
+        if model_type in ["z-image", "qwen-image"]:
+             print(f"Force snapshot download for {model_type} model: {repo_id}")
+             snapshot_download(repo_id=repo_id, repo_type="model", local_dir=save_path, local_dir_use_symlinks=False)
+             return save_path
+
         has_safetensors, safetensors_path = is_safetensors_available(repo_id)
         if has_safetensors and safetensors_path:
             return download_from_huggingface(repo_id, safetensors_path, save_path)
@@ -145,7 +150,7 @@ async def main():
 
     if args.task_type == TaskType.IMAGETASK.value:
         dataset_zip_path = await download_image_dataset(args.dataset, args.task_id, dataset_dir)
-        model_path = await download_base_model(args.model, model_dir)
+        model_path = await download_base_model(args.model, model_dir, args.model_type)
         print("Downloading clip models", flush=True)
         CLIPTokenizer.from_pretrained("openai/clip-vit-large-patch14", cache_dir=cst.HUGGINGFACE_CACHE_PATH)
         CLIPTokenizer.from_pretrained("laion/CLIP-ViT-bigG-14-laion2B-39B-b160k", cache_dir=cst.HUGGINGFACE_CACHE_PATH)
