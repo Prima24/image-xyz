@@ -161,6 +161,15 @@ async def main():
                 local_dir_use_symlinks=False
             )
 
+        elif args.model_type == "qwen-image":
+            print("Downloading qwen-image quantization file...", flush=True)
+            hf_hub_download(
+                repo_id="ostris/accuracy_recovery_adapters",
+                filename="qwen_image_torchao_uint3.safetensors",
+                local_dir=cst.HUGGINGFACE_CACHE_PATH,
+                local_dir_use_symlinks=False
+            )
+
         print("Downloading clip models", flush=True)
         CLIPTokenizer.from_pretrained("openai/clip-vit-large-patch14", cache_dir=cst.HUGGINGFACE_CACHE_PATH)
         CLIPTokenizer.from_pretrained("laion/CLIP-ViT-bigG-14-laion2B-39B-b160k", cache_dir=cst.HUGGINGFACE_CACHE_PATH)
