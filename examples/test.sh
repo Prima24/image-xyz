@@ -6,9 +6,8 @@ DATASET_ZIP="https://gradients.s3.eu-north-1.amazonaws.com/dc9853fb35c40bd4_trai
 MODEL_TYPE="qwen-image"
 EXPECTED_REPO_NAME="test_qwen-image-1"
 
-HUGGINGFACE_USERNAME="Gege24"
-Hugging Face Token
-HUGGINGFACE_TOKEN="YOUR_HUGGINGFACE_TOKEN_HERE"
+HUGGINGFACE_USERNAME=""
+HUGGINGFACE_TOKEN=""
 LOCAL_FOLDER="/app/checkpoints/$TASK_ID/$EXPECTED_REPO_NAME"
 
 CHECKPOINTS_DIR="$(pwd)/secure_checkpoints"
