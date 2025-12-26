@@ -151,6 +151,16 @@ async def main():
     if args.task_type == TaskType.IMAGETASK.value:
         dataset_zip_path = await download_image_dataset(args.dataset, args.task_id, dataset_dir)
         model_path = await download_base_model(args.model, model_dir, args.model_type)
+
+        if args.model_type == "z-image":
+            print("Downloading z-image assistant LoRA...", flush=True)
+            hf_hub_download(
+                repo_id="gradients-io-tournaments/Z-Image-Turbo",
+                filename="zimage_turbo_training_adapter_v2.safetensors",
+                local_dir=cst.HUGGINGFACE_CACHE_PATH,
+                local_dir_use_symlinks=False
+            )
+
         print("Downloading clip models", flush=True)
         CLIPTokenizer.from_pretrained("openai/clip-vit-large-patch14", cache_dir=cst.HUGGINGFACE_CACHE_PATH)
         CLIPTokenizer.from_pretrained("laion/CLIP-ViT-bigG-14-laion2B-39B-b160k", cache_dir=cst.HUGGINGFACE_CACHE_PATH)
