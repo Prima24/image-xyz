@@ -155,7 +155,7 @@ async def main():
         if args.model_type == "z-image":
             print("Downloading z-image assistant LoRA...", flush=True)
             hf_hub_download(
-                repo_id="gradients-io-tournaments/Z-Image-Turbo",
+                repo_id="ostris/zimage_turbo_training_adapter",
                 filename="zimage_turbo_training_adapter_v2.safetensors",
                 local_dir=cst.HUGGINGFACE_CACHE_PATH,
                 local_dir_use_symlinks=False
